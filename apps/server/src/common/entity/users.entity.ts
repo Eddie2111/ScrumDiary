@@ -1,6 +1,5 @@
 import {
     Entity,
-    PrimaryKey,
     Property,
     Unique,
     OneToMany,
