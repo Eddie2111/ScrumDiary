@@ -1,22 +1,23 @@
-import { Entity, PrimaryKey, Property, ManyToOne, ManyToMany, Collection, Index } from "@mikro-orm/core";
-import { User } from "./users.entity";
+import { Entity, Property, ManyToOne } from "@mikro-orm/core";
+import { Users } from "./users.entity";
+import { Enum_TASK_STATUS } from "../enums/status.enums";
+import { Boards } from "./boards.entity";
+import { CommonBase } from "./common-base.entity";
 
 @Entity()
-@Index({ properties: ['name'] })
-
-export class Task {
-    @PrimaryKey()
-    id!: number; // Auto-increment primary key
-
+export class Task extends CommonBase {
     @Property()
     name!: string;
 
-    @Property({ onCreate: () => new Date() })
-    createdAt!: Date; // Default value as `now()`
+    @Property()
+    description!: string;
 
-    @Property({ onUpdate: () => new Date() })
-    updatedAt!: Date; // Updated whenever the entity is updated
+    @Property()
+    status!: Enum_TASK_STATUS;
 
-    @ManyToOne(() => User)
-    createdBy!: User; // Many-to-one relation with User
+    @ManyToOne(() => Users)
+    createdBy!: Users;
+
+    @ManyToOne(() => Boards)
+    board!: Boards;
 }
