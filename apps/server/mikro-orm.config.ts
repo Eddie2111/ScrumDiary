@@ -10,5 +10,9 @@ export default defineConfig({
     port: 5432,
     entities: ['./dist/**/*.entity.js'],
     entitiesTs: ['./src/**/*.entity.ts'],
-    debug: true, // Enable debug mode to log discovered entities
+    debug: true,
+    migrations: {
+        path: './dist/src/common/db/migrations',
+        pathTs: './src/common/db/migrations',
+    }
 });

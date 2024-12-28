@@ -5,39 +5,30 @@ import {
     Unique,
     OneToMany,
     Collection,
+    ManyToMany,
 } from '@mikro-orm/core';
-// import { Account } from './account.entity';
-// import { Session } from './session.entity';
-// import { Post } from './post.entity';
 import { Task } from './tasks.entity';
+import { Boards } from './boards.entity';
+import { CommonBase } from './common-base.entity';
 
 @Entity()
-export class User {
-    @PrimaryKey()
-    id!: string; // Primary key with `cuid` (you can generate this in your app)
+export class Users extends CommonBase{
+    @Property()
+    name?: string;
 
-    @Property({ nullable: true })
-    name?: string; // Nullable property
-
-    @Property({ nullable: true })
+    @Property()
     @Unique()
-    email?: string; // Nullable and unique
+    email?: string;
 
-    @Property({ nullable: true })
-    emailVerified?: Date; // Nullable Date property
+    @Property()
+    password!: string;
 
-    @Property({ nullable: true })
-    image?: string; // Nullable image URL
-
-    // @OneToMany(() => Account, (account) => account.user)
-    // accounts = new Collection<Account>(this); // One-to-many relation with Account
-
-    // @OneToMany(() => Session, (session) => session.user)
-    // sessions = new Collection<Session>(this); // One-to-many relation with Session
-
-    // @OneToMany(() => Post, (post) => post.createdBy)
-    // posts = new Collection<Post>(this); // One-to-many relation with Post
+    @OneToMany(() => Boards, (boards) => boards.createdBy)
+    createdBoards = new Collection<Boards>(this);
 
     @OneToMany(() => Task, (task) => task.createdBy)
-    task = new Collection<Task>(this); // One-to-many relation with Todo
+    tasks = new Collection<Task>(this);
+
+    @ManyToMany(() => Boards, board => board.members, { owner: true })
+    memberOfBoards = new Collection<Boards>(this);
 }
