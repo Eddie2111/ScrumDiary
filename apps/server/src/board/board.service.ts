@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
+import { BoardRepository } from './board.repository';
 
 @Injectable()
 export class BoardService {
+  constructor(
+    private readonly boardRepository: BoardRepository
+  ) {}
   create(createBoardDto: CreateBoardDto) {
-    return 'This action adds a new board';
+    const user = 1;
+    return this.boardRepository.createBoard(user,createBoardDto);
   }
 
-  findAll() {
-    return `This action returns all board`;
+  findAll(userId?: number) {
+    const user = userId ?? 1;
+    return this.boardRepository.getBoardsById(user);
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} board`;
+    return this.boardRepository.getBoardById(id);
   }
 
   update(id: number, updateBoardDto: UpdateBoardDto) {
-    return `This action updates a #${id} board`;
+    const boardId = id;
+    return this.boardRepository.updateBoard(boardId,updateBoardDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} board`;
+    return this.boardRepository.deleteBoard(id);
   }
 }
