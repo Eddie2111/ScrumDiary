@@ -12,9 +12,10 @@ export class TodoController {
     return this.todoService.create(createTodoDto);
   }
 
-  @Get()
-  findAll() {
-    return this.todoService.findAll();
+  @Get("board/:boardId")
+  findAll(@Param('boardId') boardId: string) {
+    if(typeof(boardId) === 'string' && boardId.length > 0) throw new Error("Invalid boardId");
+    return this.todoService.findAllByBoard(boardId);
   }
 
   @Get(':id')
