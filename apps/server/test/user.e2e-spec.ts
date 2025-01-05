@@ -30,4 +30,12 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect({ statusCode: 400, message: USER_NOT_FOUND, data: USER_NOT_FOUND });
   });
+
+  it('/user/login (POST) logs in a user succesfully', () => {
+    return request(app.getHttpServer())
+      .post(`/user/login`)
+      .send({ email: 'test@test.com', password: 'test' })
+      .expect(200)
+      .expect({ statusCode: 200, message: 'User logged in successfully', data: {id: 1, name: 'Test User', email: 'test@test.com' } });
+  });
 });

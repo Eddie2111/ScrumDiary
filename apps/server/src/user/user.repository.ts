@@ -1,3 +1,4 @@
+import argon2 from "argon2";
 import { Injectable } from '@nestjs/common';
 import { Users } from "src/common/entity/users.entity";
 import { CreateUserDto } from "./dto/create-user.dto";
@@ -19,6 +20,11 @@ export class UserRepository {
         const user = await this.em.findOne(Users, { email: email });
         return user;
     }
+    
+    async getUsersByName(name: string): Promise<Users[]> {
+        const users = await this.em.find(Users, { name: name });
+        return users;
+    }
 
     async createUser(user: CreateUserDto): Promise<Users> {
         const newUser = new Users();
@@ -33,15 +39,16 @@ export class UserRepository {
         return newUser;
     }
 
-    async updateUser(id:number, user: UpdateUserDto): Promise<Users> {
+    async updateUser(id:number, user: UpdateUserDto): Promise<boolean> {
         const userToUpdate = await this.em.findOne(Users, { id: id});
         userToUpdate.name = user.firstName + " " + user.lastName;
         userToUpdate.email = user.email;
         userToUpdate.updatedAt = new Date();
+        userToUpdate.password = await argon2.hash(user.password);
 
         await this.em.persistAndFlush(userToUpdate);
 
-        return userToUpdate;
+        return true;
     }
 
     async deleteUser(id: number): Promise<string> {

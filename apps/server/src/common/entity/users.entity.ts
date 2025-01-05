@@ -22,12 +22,12 @@ export class Users extends CommonBase{
     @Property()
     password!: string;
 
-    @OneToMany(() => Boards, (boards) => boards.createdBy)
+    @OneToMany(() => Boards, (boards) => boards.createdBy, { lazy: true })
     createdBoards = new Collection<Boards>(this);
 
-    @OneToMany(() => Task, (task) => task.createdBy)
+    @OneToMany(() => Task, (task) => task.createdBy, { lazy: true })
     tasks = new Collection<Task>(this);
 
-    @ManyToMany(() => Boards, board => board.members, { owner: true })
+    @ManyToMany(() => Boards, (board) => board.members, { owner: true, lazy: true })
     memberOfBoards = new Collection<Boards>(this);
 }

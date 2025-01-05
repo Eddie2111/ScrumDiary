@@ -6,7 +6,7 @@ export default defineConfig({
     environment: 'node',
     passWithNoTests: true,
     clearMocks: true,
-    include: ['**/*.spec.ts'],
+    include: ['**/*.e2e-spec.ts'],
     reporters: ['verbose'],
     testTimeout: 120000,
   }
