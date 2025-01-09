@@ -1,4 +1,3 @@
-"use client";
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui/card';
 
@@ -38,7 +37,7 @@ export default function Testimonials() {
                     <AvatarFallback>{testimonial.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                   </Avatar>
                   <div>
-                    <CardTitle className="text-lg font-semibold">{testimonial.name}</CardTitle>
+                    <CardTitle className="text-white text-lg font-semibold">{testimonial.name}</CardTitle>
                     <p className="text-sm text-gray-400">{testimonial.role}</p>
                   </div>
                 </div>

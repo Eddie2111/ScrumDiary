@@ -1,4 +1,3 @@
-"use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Kanban, Users, BarChart3, Zap } from 'lucide-react'
 
@@ -35,7 +34,7 @@ export default function Features() {
             <Card key={index} className="bg-gray-700 border-gray-600">
               <CardHeader>
                 <feature.icon className="w-10 h-10 mb-4 text-purple-500" />
-                <CardTitle className="text-xl font-semibold">{feature.title}</CardTitle>
+                <CardTitle className="text-xl font-semibold text-white">{feature.title}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-gray-300">{feature.description}</CardDescription>
