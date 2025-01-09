@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 export default {
     darkMode: ["class"],
@@ -51,6 +52,11 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
+  		},
+  		borderRadius: {
+  			lg: 'var(--radius)',
+  			md: 'calc(var(--radius) - 2px)',
+  			sm: 'calc(var(--radius) - 4px)'
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
