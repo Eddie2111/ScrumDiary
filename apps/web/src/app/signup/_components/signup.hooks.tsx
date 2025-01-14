@@ -38,7 +38,7 @@ export const SignupFormHooks = () => {
         console.log(data);
         try {
           await new Promise((resolve) => setTimeout(resolve, 1500))
-          // router.push('/dashboard') // Redirect to dashboard on successful signup
+          router.push('/dashboard')
         } catch (error) {
           console.error('Signup failed', error)
         }
