@@ -5,17 +5,17 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Card } from '@/shared/components/ui/card';
 
 export default function Header() {
-    const router = useRouter();
-    const pathname = usePathname()
-    const isLoggedIn = false;
+  const router = useRouter();
+  const pathname = usePathname()
+  const isLoggedIn = false;
   return (
-    <div className="border-b border-gray-800 bg-gray-900">
+    <div className="bg-gray-900 border-none">
       <Card className="container mx-auto p-4 flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold text-purple-500">
           ScrumDiary
         </Link>
         <nav className="hidden md:flex space-x-4">
-        {isLoggedIn ? (
+          {isLoggedIn ? (
             <Link href="/dashboard" className="text-gray-300 hover:text-white transition-colors">
               Dashboard
             </Link>
@@ -34,15 +34,14 @@ export default function Header() {
           )}
         </nav>
         <div className="flex space-x-2">
-          <Button variant="ghost" className="text-gray-300 hover:text-white" onClick={() => router.push('/login')}>
+          <Button variant="ghost" className="text-gray-300 hover:text-black" onClick={() => router.push(pathname === '/login' ? '/' : '/login')}>
             {pathname === '/login' ? 'Home' : 'Log in'}
           </Button>
-          <Button className="bg-purple-600 hover:bg-purple-700 text-white" onClick={() => router.push('/signup')}>
-          {pathname === '/signup' ? 'Home' : 'Sign up'}
+          <Button className="bg-purple-600 hover:bg-purple-700 text-white" onClick={() => router.push(pathname === '/signup' ? '/' : '/signup')}>
+            {pathname === '/signup' ? 'Home' : 'Sign up'}
           </Button>
         </div>
       </Card>
     </div>
   )
 }
-

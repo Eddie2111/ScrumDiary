@@ -2,7 +2,6 @@
 import Hero from './_components/hero'
 import Features from './_components/features'
 import Testimonials from './_components/testimonial'
-import Footer from './_components/footer'
 
 export default function Home() {
   return (
@@ -12,7 +11,6 @@ export default function Home() {
         <Features />
         <Testimonials />
       </main>
-      <Footer />
     </div>
   )
 }
